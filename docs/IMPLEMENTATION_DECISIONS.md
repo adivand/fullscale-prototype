@@ -1,0 +1,5 @@
+# P1.0 implementation decisions
+
+- **Land Move Actions.** P1-MOVE-02 prescribes both a one-index Land displacement and a sentence about row preservation. When a snake step changes rows, the explicit Land path index takes precedence. P1-TEST-03 covers a row-changing step.
+- **PROTOTYPE-ONLY — blocked deployment.** When a legal deployment cannot complete a friendly Push, it stays paid and goes to normal discard. P1-MOVE-03 makes index 0 visual-only, so the deployment has no persistent origin to return to. The blocked-deployment test verifies that the board is unchanged and the card goes to discard.
+- **PROTOTYPE-ONLY — dependent arrivals.** If one mover needs the other mover's origin and that mover cannot vacate it, the dependent arrival is also blocked. The active unit does not become a Surprise defender during the same pair. When simultaneous placements cannot both succeed but either could succeed alone, the lower permanent card ID takes priority per P1-COM-06. The blocked-origin test covers the dependency.

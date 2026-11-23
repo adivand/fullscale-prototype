@@ -1,35 +1,29 @@
 # FULLSCALE — Prototype
 
-Mobile-first browser prototype for the **FULLSCALE** simultaneous-action board/card strategy game.
+The deterministic P1.0 rules engine is implemented. The playable hot-seat interface and deployment are pending.
 
-## Project status
+The authoritative specification is [P1.0 Test Rules](docs/TEST_RULES.md). The [implementation decisions](docs/IMPLEMENTATION_DECISIONS.md) document how conflicting or underspecified edge cases resolve.
 
-**Bootstrap stage — game not implemented or deployed yet.**
+## Development
 
-The current authoritative test specification is in [`docs/TEST_RULES.md`](docs/TEST_RULES.md), version **P1.0**. It defines the 6×8 three-lane board, placeholder Land/Sea/Air cards, two-player hot-seat programming, combat, turn timing, and prototype victory conditions.
+Use Node.js 20.19+ or 22.12+.
 
-[Original living Test Rules Google Doc](https://docs.google.com/document/d/1jlDsXEQgh-dZcRKGmgITzTa0Ci4IPraLJoRrTjlrDvU/edit) (the checked-in document is a snapshot; changes do not sync automatically).
+```sh
+npm ci
+npm test
+npm run typecheck
+npm run build
+npm run dev
+```
 
-Codex should read [`AGENTS.md`](AGENTS.md) and the entire test rules before writing code.
+The Vite shell uses the `/fullscale-prototype/` base path. The browser currently shows a project status page.
 
-## Planned stack
+## Engine entry points
 
-- TypeScript + Vite
-- Plain HTML/CSS, unless a lightweight UI framework is demonstrably simpler
-- Deterministic standalone rules engine and automated tests
-- GitHub Pages hosting from `/fullscale-prototype/`
-- iPhone Safari / Add to Home Screen
-- Initially **hot-seat**, not online two-device multiplayer
-
-## Next development step
-
-Open this repository in **Codex cloud** or a local Codex-compatible workspace. Ask Codex to build the complete playable P1.0 prototype against the checked-in rules, with tests and GitHub Pages deployment configuration.
-
-Do not claim that a deployed app exists until the Pages workflow has succeeded and the website has been tested.
-
-## User-facing privacy
-
-The first playable version will run entirely in one browser. Each player will privately order cards using a handoff screen. GitHub Pages only hosts static game files and does not provide a server for online multiplayer.
+- `createGame(seed)` creates the initial state with the seeded draws.
+- `commitOrders(state, owner, orders)` commits a full hand in top-to-bottom order, with lane choices represented as `1`, `2`, or `3`.
+- `advance(state)` advances one reveal beat, lane wave, or cleanup and returns a new state. It requires both commitments before the first reveal.
+- `gameView(state, viewer)` returns a player-facing projection. Omit the viewer on shared handoff screens. Keep the full simulation state and replay inputs private.
 
 ## License
 
