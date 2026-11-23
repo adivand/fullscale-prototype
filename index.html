@@ -2,14 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FULLSCALE Prototype</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#10151b">
+    <meta name="description" content="FULLSCALE P1.0, a two-player hot-seat strategy game.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FULLSCALE">
+    <link rel="manifest" href="%BASE_URL%manifest.webmanifest">
+    <link rel="apple-touch-icon" href="%BASE_URL%icons/icon-180.png">
+    <link rel="icon" type="image/png" href="%BASE_URL%icons/icon-192.png">
+    <title>FULLSCALE · P1.0</title>
   </head>
   <body>
-    <main>
-      <h1>FULLSCALE</h1>
-      <p>P1.0 rules engine. The game interface is pending.</p>
-    </main>
+    <header class="masthead">
+      <div class="identity">
+        <img src="%BASE_URL%icons/icon-192.png" alt="" width="40" height="40">
+        <div><h1>FULLSCALE</h1><p>P1.0 · Two-player hot seat</p></div>
+      </div>
+      <nav class="header-actions" aria-label="Match controls">
+        <button data-action="rules">Rules</button>
+        <button data-action="reset">Reset</button>
+        <button data-action="new">New Game</button>
+      </nav>
+    </header>
+    <main id="app"></main>
+    <dialog id="game-dialog" aria-labelledby="dialog-title"><form method="dialog" class="dialog-content"></form></dialog>
+    <noscript>This game requires JavaScript.</noscript>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
